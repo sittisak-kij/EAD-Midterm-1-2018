@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="EAD-Midterm-1-2018:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/EAD_Midterm_1_2018_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="EAD-Midterm-1-2018/web/Web" />
+      <element id="javaee-facet-resources" facet="EAD-Midterm-1-2018/web/Web2" />
+    </root>
+  </artifact>
+</component>

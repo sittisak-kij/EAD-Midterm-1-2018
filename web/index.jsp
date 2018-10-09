@@ -10,7 +10,7 @@
   <title>Employees</title>
 </head>
 <body>
-<h1>Products</h1>
+<h1>Employees</h1>
 
 <sql:query dataSource="jdbc/employees" var="result">
   SELECT * FROM employees
@@ -40,7 +40,7 @@
       <td><c:out value="${row.gender}"/></td>
       <td><c:out value="${row.birth_date}"/></td>
       <td><c:out value="${row.hire_date}"/></td>
-      <td><button onclick="window.location='product-update.jsp?id=<c:out value="${row.emp_no}"/>';">UPDATE</button></td>
+      <td><button onclick="window.location='employee-update.jsp?id=<c:out value="${row.emp_no}"/>';">UPDATE</button></td>
       <td><button onclick="confirmDelete(<c:out value="${row.emp_no}"/>);">DELETE</button></td>
     </tr>
   </c:forEach>

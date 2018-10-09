@@ -23,7 +23,6 @@ public class EmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // Deletion
-        String id = request.getParameter("id");
         String cmd = request.getParameter("cmd");
 
         // Insertion
@@ -38,7 +37,6 @@ public class EmployeeServlet extends HttpServlet {
         // Set response content type
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-
 
         // Insertion
         out.println(empNo+"<br/>");
@@ -56,17 +54,25 @@ public class EmployeeServlet extends HttpServlet {
             DataSource ds = (DataSource)envContext.lookup("java:/comp/env/jdbc/employees");
             Connection con = ds.getConnection();
 
-
-            String sql = "";
             if (cmd != null && cmd.equals("d")) {
                 // Delete a product
-                sql = "DELETE FROM employees WHERE emp_no = ?";
+                String sql = "DELETE FROM employees WHERE emp_no = ?";
                 PreparedStatement stmt = con.prepareStatement(sql);
                 stmt.setInt(1, Integer.parseInt(id));
                 stmt.execute();
-            } else {
+            } else if (cmd != null && cmd.equals("update")) {
+                String sql = "UPDATE employees SET birth_date = ?, first_name = ?, last_name = ?, gender = ?, hire_date = ? WHERE emp_no = ?";
+                PreparedStatement stmt = connection.prepareStatement(sql);
+                stmt.setString(1, birthDate);
+                stmt.setString(2, firstName);
+                stmt.setString(3, lastName);
+                stmt.setString(4, gender);
+                stmt.setString(5, hireDate);
+                stmt.setInt(6, Integer.parseInt(empNo));
+                stmt.execute();
+            } else if (cmd == null) {
                 // Insert a new product
-                sql = "insert into employees (emp_no, birth_date, first_name, last_name, gender, hire_date) values (?, ?, ?, ?, ?, ?)";
+                String sql = "insert into employees (emp_no, birth_date, first_name, last_name, gender, hire_date) values (?, ?, ?, ?, ?, ?)";
                 PreparedStatement stmt = con.prepareStatement(sql);
                 stmt.setInt(1, Integer.parseInt(empNo));
                 stmt.setString(2, birthDate);
